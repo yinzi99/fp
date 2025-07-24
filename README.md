@@ -2,4 +2,4 @@
 
 ## The User storys
 
-[User story 1.0]{./documents/UserStories.md}
+[User story 1.0](./documents/UserStories.md)
