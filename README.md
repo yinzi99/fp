@@ -6,7 +6,7 @@
 
 ## The Front API requirements
 ![mywallet page demo](./documents/mywallet.png)
-![market page demo](./documents/martet.png)
+![market page demo](./documents/market.png)
 [The Front API requirements](./documents/apirequire.md)
 
 
