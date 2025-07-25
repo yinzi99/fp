@@ -1,0 +1,1339 @@
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>我的资产 | 财务管理系统</title>
+    <script src="https://res.gemcoder.com/js/reload.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      href="https://cdn.bootcdn.net/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.bootcdn.net/ajax/libs/echarts/5.4.3/echarts.min.js"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              primary: '#165DFF',
+              secondary: '#36CFC9',
+              success: '#52C41A',
+              warning: '#FAAD14',
+              danger: '#FF4D4F',
+              dark: '#1D2129',
+              'dark-2': '#4E5969',
+              'light-1': '#F2F3F5',
+              'light-2': '#E5E6EB',
+              'light-3': '#C9CDD4'
+            },
+            fontFamily: {
+              inter: ['Inter', 'system-ui', 'sans-serif']
+            },
+            boxShadow: {
+              'card': '0 4px 20px rgba(0, 0, 0, 0.08)',
+              'card-hover': '0 8px 30px rgba(0, 0, 0, 0.12)'
+            }
+          }
+        }
+      };
+    </script>
+    <style type="text/tailwindcss">
+      @layer utilities {
+          .content-auto {
+              content-visibility: auto;
+          }
+          .card-transition {
+              transition: all 0.3s ease;
+          }
+          .scrollbar-hide::-webkit-scrollbar {
+              display: none;
+          }
+          .scrollbar-hide {
+              -ms-overflow-style: none;
+              scrollbar-width: none;
+          }
+          .text-balance {
+              text-wrap: balance;
+          }
+      }
+    </style>
+  </head>
+  <body class="font-inter bg-gray-50 text-dark min-h-screen flex flex-col">
+    <!-- 顶部导航栏 -->
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+      <div class="container mx-auto px-4">
+        <div class="flex items-center justify-between h-16">
+          <!-- Logo -->
+          <div class="flex items-center">
+            <div class="text-primary font-bold text-xl flex items-center">
+              <i class="fas fa-wallet mr-2"> </i>
+              <span data-yteditvalue="Wealth Manager"> Wealth Manager </span>
+            </div>
+          </div>
+          <!-- 中间导航 -->
+          <nav
+            class="hidden md:flex space-x-8"
+            data-ytextravalue="extra-canhvfl3d"
+          >
+            <a
+              class="text-primary font-medium flex items-center"
+              data-yteditvalue="My Wallet"
+              data-ytindex="0"
+              data-ytoriginindex="0"
+              href="javascript:void(0);"
+            >
+              <i class="fas fa-home mr-1"> </i>
+              My Wallet
+            </a>
+            <a
+              class="text-dark-2 hover:text-primary transition-colors flex items-center"
+              custom-href="w=1082&h=765&appuuid=1948196417445036032&version=1&pageType=web&uuid=1948213912981733376&appName=股票交易"
+              data-yteditvalue="Market"
+              data-ytextravalue="extra-qs745mbbv"
+              data-ytindex="1"
+              data-ytoriginindex="2"
+              data-ytparentvalue="extra-canhvfl3d"
+              href="javascript:void(0);"
+              is-add="false"
+              is-page="true"
+              onclick='
+          const parseWithURLSearchParams = (queryString) => {
+            const params = queryString.split("&")
+            const result = {}
+            params.forEach(param => {
+              const key = param.split("=")[0]
+              const value = param.split("=")[1]
+              result[key] = value
+            })
+            return result
+          }
+          const topWin = window.top
+          const originParams = parseWithURLSearchParams(topWin.document.location.href.split("?")[1])
+          const href = this.getAttribute("custom-href")
+          if (href) {
+            if (topWin.location.hash.startsWith("#/edit?")) {
+              const { uuid } = parseWithURLSearchParams(href)
+              const event = new CustomEvent("changePage", {
+                detail: { uuid },
+                bubbles: true,
+                cancelable: true
+              });
+              topWin.dispatchEvent(event)
+            } else {
+              const newParams = parseWithURLSearchParams(href)
+              const event = new CustomEvent("previewPageVersion", {
+                detail: {
+                  appuuid: newParams?.appuuid,
+                  pageUuid: newParams?.uuid,
+                  callback: (version) => {
+                    const params = Object.keys(originParams).reduce((acc, key) => {
+                      if (acc !== "?") {
+                        acc+="&"
+                      }
+                      if (key === "version") {
+                        acc+=key+"="+version
+                      } else {
+                        acc+=key+"="+newParams[key]
+                      }
+                      return acc
+                    }, "?")
+                    topWin.location.href = topWin.document.location.href.split("?")[0] + params
+                  }
+                },
+                bubbles: true,
+                cancelable: true
+              });
+              topWin.dispatchEvent(event)
+            }
+          }
+        '
+              style="opacity: 1; color: rgb(78, 89, 105); font-family: Inter, system-ui, sans-serif; font-size: 16px; font-weight: 400; font-style: normal; line-height: 24px; text-align: start; text-indent: 0px; position: relative; left: 0px;"
+              target="_top"
+            >
+              <i
+                class="fas fa-chart-line mr-1"
+                data-ytindex="0"
+                data-ytoriginindex="0"
+                data-ytparentvalue="extra-qs745mbbv"
+                style='opacity: 1; color: rgb(78, 89, 105); font-family: "Font Awesome 6 Free"; font-size: 16px; font-weight: 900; font-style: normal; line-height: 16px; text-align: start; text-indent: 0px;'
+              >
+              </i>
+              Market
+            </a>
+          </nav>
+          <!-- 右侧用户区域 -->
+          <div class="flex items-center space-x-4">
+            <div class="relative">
+              <button
+                class="text-dark-2 hover:text-primary transition-colors p-2 rounded-full hover:bg-gray-100"
+              >
+                <i class="fas fa-bell text-lg"> </i>
+                <span
+                  class="absolute top-1 right-1 w-2 h-2 bg-danger rounded-full"
+                >
+                </span>
+              </button>
+            </div>
+            <div class="flex items-center space-x-2 cursor-pointer group">
+              <div
+                class="w-8 h-8 rounded-full overflow-hidden border-2 border-transparent group-hover:border-primary transition-all"
+              >
+                <img
+                  alt="用户头像"
+                  class="w-full h-full object-cover"
+                  src="https://design.gemcoder.com/staticResource/echoAiSystemImages/e5e131f8801a1478402635b422cfee5b.png"
+                />
+              </div>
+              <span class="hidden md:inline text-sm font-medium"> Master </span>
+              <i class="fas fa-chevron-down text-xs text-dark-2"> </i>
+            </div>
+            <button
+              class="text-dark-2 hover:text-danger transition-colors p-2 rounded-full hover:bg-gray-100"
+            >
+              <i class="fas fa-sign-out-alt text-lg"> </i>
+            </button>
+          </div>
+        </div>
+      </div>
+    </header>
+    <!-- 主要内容区域 -->
+    <main class="flex-grow container mx-auto px-4 py-6">
+      <!-- 页面标题 -->
+      <div class="mb-6">
+        <h1 class="text-[clamp(1.5rem,3vw,2rem)] font-bold text-dark">
+          我的资产
+        </h1>
+        <p class="text-dark-2 mt-1" data-yteditvalue></p>
+      </div>
+	  <!-- 资产概览卡片 -->
+<div
+  class="grid grid-cols-1 md:grid-cols-4 gap-5 mb-6"
+  data-ytextravalue="extra-zaxoyb0xc"
+>
+	  <!-- 总资产卡片 -->
+	  <div
+		class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover hover:-translate-y-1 border-l-4 border-primary cursor-pointer"
+		data-ytindex="0"
+		data-ytoriginindex="0"
+		data-ytparentvalue="extra-zaxoyb0xc"
+		id="totalAssetCard"
+		style="opacity: 1; color: rgb(29, 33, 41); font-family: Inter, system-ui, sans-serif; font-size: 16px; font-weight: 400; font-style: normal; line-height: 24px; text-align: start; text-indent: 0px;top:-20px;position:relative"
+	  >
+		<div class="flex justify-between items-start mb-4">
+		  <div>
+			<p class="text-dark-2 text-sm font-medium">当前总资产</p>
+			<h3 class="text-2xl font-bold mt-1" id="totalAssetAmount">¥0.00</h3>
+		  </div>
+		  <div
+			class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary"
+		  >
+			<i class="fas fa-money-bill-wave"> </i>
+		  </div>
+		</div>
+		<div class="flex items-center">
+		  <span class="text-success text-sm font-medium flex items-center" id="totalAssetRate">
+			<i class="fas fa-arrow-up mr-1"> </i>
+			0.0%
+		  </span>
+		  <span class="text-dark-2 text-sm ml-2" id="totalAssetProfit"> 昨日收益: ¥0.00 </span>
+		</div>
+	  </div>
+	  
+	  <!-- 余额卡片 -->
+	  <div
+		class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover hover:-translate-y-1 border-l-4 border-secondary cursor-pointer"
+		data-ytindex="1"
+		data-ytoriginindex="1"
+		id="balanceCard"
+		style="top:-20px;position:relative"
+	  >
+		<div class="flex justify-between items-start mb-4">
+		  <div>
+			<p class="text-dark-2 text-sm font-medium">余额</p>
+			<h3 class="text-2xl font-bold mt-1" id="currentBalance">¥0.00</h3>
+		  </div>
+		  <div
+			class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary"
+		  >
+			<i class="fas fa-wallet"> </i>
+		  </div>
+		</div>
+		
+		<!-- 新增的充值和提现按钮 -->
+		<div class="flex gap-3 mb-4">
+		  <button 
+			class="flex-1 bg-green-500 hover:bg-green-600 text-white py-1 px-3 rounded-lg transition-colors text-sm"
+			onclick="openAmountModal(0)"
+		  >
+			<i class="fas fa-plus-circle mr-1"></i> 充值
+		  </button>
+		  <button 
+			class="flex-1 bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded-lg transition-colors text-sm"
+			onclick="openAmountModal(1)"
+		  >
+			<i class="fas fa-minus-circle mr-1"></i> 提现
+		  </button>
+		</div>
+
+		
+		<div class="flex items-center">
+		  <span class="text-dark-2 text-sm"> 可用资金 </span>
+		</div>
+	  </div>
+
+	  <!-- 金额输入弹窗 -->
+	  <div id="amountModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 hidden">
+		<div class="bg-white rounded-xl p-6 w-full max-w-md">
+		  <h3 class="text-xl font-bold mb-4" id="modalTitle">输入金额</h3>
+		  <div class="mb-4">
+			<label class="block text-sm font-medium text-gray-700 mb-1">金额 (元)</label>
+			<input 
+			  type="number" 
+			  id="amountInput" 
+			  class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-secondary"
+			  min="0.01" 
+			  step="0.01" 
+			  placeholder="请输入金额"
+			>
+		  </div>
+		  <div class="flex gap-3">
+			<button 
+			  class="flex-1 bg-gray-200 hover:bg-gray-300 py-2 px-4 rounded-lg transition-colors"
+			  onclick="closeAmountModal()"
+			>
+			  取消
+			</button>
+			<button 
+			  class="flex-1 bg-secondary hover:bg-secondary-dark text-white py-2 px-4 rounded-lg transition-colors"
+			  onclick="submitAmount()"
+			>
+			  确认
+			</button>
+		  </div>
+		</div>
+	  </div>
+
+	  <!-- 股票资产卡片 -->
+	  <div
+		class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover hover:-translate-y-1 border-l-4 border-warning cursor-pointer"
+		data-ytindex="2"
+		data-ytoriginindex="2"
+		id="stockCard"
+		style="top:-20px;position:relative"
+	  >
+		<div class="flex justify-between items-start mb-4">
+		  <div>
+			<p class="text-dark-2 text-sm font-medium">股票持有总额</p>
+			<h3 class="text-2xl font-bold mt-1" id="stockTotalAmount">¥0.00</h3>
+		  </div>
+		  <div
+			class="w-10 h-10 rounded-full bg-warning/10 flex items-center justify-center text-warning"
+		  >
+			<i class="fas fa-chart-line"> </i>
+		  </div>
+		</div>
+		<div class="flex items-center">
+		  <span class="text-success text-sm font-medium flex items-center" id="stockRate">
+			<i class="fas fa-arrow-up mr-1"> </i>
+			0.0%
+		  </span>
+		  <span class="text-dark-2 text-sm ml-2" id="stockYesterdayProfit"> 昨日收益: ¥0.00 </span>
+		</div>
+	  </div>
+	  
+	  <!-- 基金资产卡片 -->
+	  <div
+		class="bg-white rounded-xl shadow-card p-5 card-transition hover:shadow-card-hover hover:-translate-y-1 border-l-4 border-success cursor-pointer"
+		data-ytindex="3"
+		data-ytoriginindex="3"
+		id="fundCard"
+		style="top:-20px;position:relative"
+	  >
+		<div class="flex justify-between items-start mb-4">
+		  <div>
+			<p class="text-dark-2 text-sm font-medium">基金持有总额</p>
+			<h3 class="text-2xl font-bold mt-1" id="fundTotalAmount">¥0.00</h3>
+		  </div>
+		  <div
+			class="w-10 h-10 rounded-full bg-success/10 flex items-center justify-center text-success"
+		  >
+			<i class="fas fa-cubes"> </i>
+		  </div>
+		</div>
+		<div class="flex items-center">
+		  <span class="text-danger text-sm font-medium flex items-center" id="fundRate">
+			<i class="fas fa-arrow-down mr-1"> </i>
+			0.0%
+		  </span>
+		  <span class="text-dark-2 text-sm ml-2" id="fundYesterdayProfit"> 昨日收益: ¥0.00 </span>
+		</div>
+	  </div>
+	</div>
+
+	<!-- 引用外部JavaScript文件 -->
+	<script src="assetManager.js"></script>
+    
+	
+
+
+      <!-- 资产详情和图表区域 -->
+      <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        <!-- 左侧资产列表 -->
+        <div class="lg:col-span-1 bg-white rounded-xl shadow-card p-5">
+          <div class="flex justify-between items-center mb-5">
+            <h2 class="font-bold text-lg">资产明细</h2>
+            <div class="relative">
+              <select
+                class="appearance-none bg-gray-50 border border-light-2 text-dark-2 text-sm rounded-lg py-2 pl-3 pr-8 focus:outline-none focus:ring-2 focus:ring-primary/50 focus:border-primary"
+              >
+                <option>全部资产</option>
+                <option>股票</option>
+                <option>基金</option>
+              </select>
+              <div
+                class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-dark-2"
+              >
+                <i class="fas fa-chevron-down text-xs"> </i>
+              </div>
+            </div>
+          </div>
+          <!-- 资产列表 -->
+          <div
+            class="space-y-5 max-h-[calc(100vh-400px)] overflow-y-auto scrollbar-hide pr-2"
+          >
+            <!-- 股票分类 -->
+            <div class="mb-4">
+              <div
+                class="flex items-center justify-between cursor-pointer stock-category"
+              >
+                <div class="flex items-center">
+                  <i
+                    class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                  >
+                  </i>
+                  <h3 class="font-medium" style="left:0px;position:relative">
+                    股票
+                  </h3>
+                </div>
+                <span class="text-sm font-medium"> ¥65,840.30 </span>
+              </div>
+              <!-- 股票子类 - 互联网 -->
+              <div class="ml-4 mt-3 stock-subcategory hidden">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center">
+                    <i
+                      class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                    >
+                    </i>
+                    <h4 class="text-sm font-medium text-dark-2">互联网</h4>
+                  </div>
+                  <span class="text-sm text-dark-2"> ¥32,450.15 </span>
+                </div>
+                <!-- 互联网股票列表 -->
+                <div class="ml-4 mt-3 space-y-3 stock-items hidden">
+                  <div
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer asset-item"
+                    data-id="xiaomi"
+                    data-type="stock"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        alt="小米"
+                        class="w-8 h-8 rounded object-cover mr-3"
+                        src="https://design.gemcoder.com/staticResource/echoAiSystemImages/a76ab7255f280a1ce958cc4799454df4.png"
+                      />
+                      <div>
+                        <p class="text-sm font-medium">小米集团</p>
+                        <p class="text-xs text-dark-2">01810.HK</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">¥12,560.50</p>
+                      <p class="text-xs text-success">+2.3%</p>
+                    </div>
+                  </div>
+                  <div
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer asset-item"
+                    data-id="tencent"
+                    data-type="stock"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        alt="腾讯"
+                        class="w-8 h-8 rounded object-cover mr-3"
+                        src="https://design.gemcoder.com/staticResource/echoAiSystemImages/7c69558055c16ec817cb5a09db4d6cca.png"
+                      />
+                      <div>
+                        <p class="text-sm font-medium">腾讯控股</p>
+                        <p class="text-xs text-dark-2">00700.HK</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">¥19,889.65</p>
+                      <p class="text-xs text-success">+3.1%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 股票子类 - 新能源 -->
+              <div class="ml-4 mt-3 stock-subcategory hidden">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center">
+                    <i
+                      class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                    >
+                    </i>
+                    <h4 class="text-sm font-medium text-dark-2">新能源</h4>
+                  </div>
+                  <span class="text-sm text-dark-2"> ¥33,390.15 </span>
+                </div>
+                <!-- 新能源股票列表 -->
+                <div class="ml-4 mt-3 space-y-3 stock-items hidden">
+                  <div
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer asset-item"
+                    data-id="byd"
+                    data-type="stock"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        alt="比亚迪"
+                        class="w-8 h-8 rounded object-cover mr-3"
+                        src="https://design.gemcoder.com/staticResource/echoAiSystemImages/77d9cb1ac7349ba99fae43acf61e4ce6.png"
+                      />
+                      <div>
+                        <p class="text-sm font-medium">比亚迪</p>
+                        <p class="text-xs text-dark-2">002594.SZ</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">¥33,390.15</p>
+                      <p class="text-xs text-danger">-1.2%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 基金分类 -->
+            <div class="mb-4">
+              <div
+                class="flex items-center justify-between cursor-pointer fund-category"
+              >
+                <div class="flex items-center">
+                  <i
+                    class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                  >
+                  </i>
+                  <h3 class="font-medium">基金</h3>
+                </div>
+                <span class="text-sm font-medium"> ¥27,520.15 </span>
+              </div>
+              <!-- 基金子类 - 指数基金 -->
+              <div class="ml-4 mt-3 fund-subcategory hidden">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center">
+                    <i
+                      class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                    >
+                    </i>
+                    <h4 class="text-sm font-medium text-dark-2">指数基金</h4>
+                  </div>
+                  <span class="text-sm text-dark-2"> ¥15,200.75 </span>
+                </div>
+                <!-- 指数基金列表 -->
+                <div class="ml-4 mt-3 space-y-3 fund-items hidden">
+                  <div
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer asset-item"
+                    data-id="hs300"
+                    data-type="fund"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        alt="沪深300指数"
+                        class="w-8 h-8 rounded object-cover mr-3"
+                        src="https://design.gemcoder.com/staticResource/echoAiSystemImages/992a9dd5c806a7365315ffb771954c2c.png"
+                      />
+                      <div>
+                        <p class="text-sm font-medium">沪深300指数基金</p>
+                        <p class="text-xs text-dark-2">指数型</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">¥15,200.75</p>
+                      <p class="text-xs text-success">+0.8%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- 基金子类 - 混合型基金 -->
+              <div class="ml-4 mt-3 fund-subcategory hidden">
+                <div class="flex items-center justify-between cursor-pointer">
+                  <div class="flex items-center">
+                    <i
+                      class="fas fa-chevron-right text-xs text-dark-2 mr-2 transition-transform duration-300"
+                    >
+                    </i>
+                    <h4 class="text-sm font-medium text-dark-2">混合型基金</h4>
+                  </div>
+                  <span class="text-sm text-dark-2"> ¥12,319.40 </span>
+                </div>
+                <!-- 混合型基金列表 -->
+                <div class="ml-4 mt-3 space-y-3 fund-items hidden">
+                  <div
+                    class="flex items-center justify-between p-2 rounded-lg hover:bg-gray-50 cursor-pointer asset-item"
+                    data-id="growth"
+                    data-type="fund"
+                  >
+                    <div class="flex items-center">
+                      <img
+                        alt="成长精选混合"
+                        class="w-8 h-8 rounded object-cover mr-3"
+                        src="https://design.gemcoder.com/staticResource/echoAiSystemImages/53fa0eec8d6904a95a98f637ecfe6e84.png"
+                      />
+                      <div>
+                        <p class="text-sm font-medium">成长精选混合</p>
+                        <p class="text-xs text-dark-2">混合型</p>
+                      </div>
+                    </div>
+                    <div class="text-right">
+                      <p class="text-sm font-medium">¥12,319.40</p>
+                      <p class="text-xs text-danger">-1.8%</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- 现金 -->
+            <div>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center">
+                  <i class="fas fa-wallet text-dark-2 mr-2"> </i>
+                  <h3 class="font-medium">现金余额</h3>
+                </div>
+                <span class="text-sm font-medium"> ¥35,200.00 </span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 右侧图表区域 -->
+        <div class="lg:col-span-2 space-y-6">
+          <!-- 图表标题和时间选择器 -->
+          <div class="flex flex-wrap justify-between items-center">
+            <h2 class="font-bold text-lg" id="chartTitle">资产走势与构成</h2>
+            <div class="flex space-x-2 mt-2 sm:mt-0">
+              <button
+                class="chart-period-btn px-3 py-1 text-xs font-medium rounded-full bg-primary text-white"
+              >
+                日
+              </button>
+              <button
+                class="chart-period-btn px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-dark-2 hover:bg-gray-200 transition-colors"
+                onclick='switchChartPeriod("month")'
+              >
+                周
+              </button>
+              <button
+                class="chart-period-btn px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-dark-2 hover:bg-gray-200 transition-colors"
+              >
+                月
+              </button>
+              <button
+                class="chart-period-btn px-3 py-1 text-xs font-medium rounded-full bg-gray-100 text-dark-2 hover:bg-gray-200 transition-colors"
+              >
+                年
+              </button>
+            </div>
+          </div>
+          <!-- 走势图 -->
+          <div class="bg-white rounded-xl shadow-card p-5">
+            <div class="w-full h-[300px]" id="trendChart"></div>
+          </div>
+          <!-- 饼图 -->
+          <div
+            class="bg-white rounded-xl shadow-card p-5"
+            id="compositionChartContainer"
+          >
+            <div class="w-full h-[300px]" id="compositionChart"></div>
+          </div>
+          <!-- 单资产详情（初始隐藏） -->
+          <div
+            class="bg-white rounded-xl shadow-card p-5 hidden"
+            id="singleAssetDetail"
+          >
+            <div class="flex items-center justify-between mb-4">
+              <div class="flex items-center">
+                <img
+                  alt
+                  class="w-10 h-10 rounded object-cover mr-3"
+                  id="singleAssetLogo"
+                  src
+                />
+                <div>
+                  <h3 class="font-bold" id="singleAssetName"></h3>
+                  <p class="text-dark-2 text-sm" id="singleAssetCode"></p>
+                </div>
+              </div>
+              <div class="text-right">
+                <p class="text-2xl font-bold" id="singleAssetValue"></p>
+                <p
+                  class="text-success text-sm font-medium flex items-center justify-end mt-1"
+                  id="singleAssetChange"
+                >
+                  <i class="fas fa-arrow-up mr-1"> </i>
+                  2.3%
+                </p>
+              </div>
+            </div>
+            <div class="grid grid-cols-3 gap-4 text-center mt-6">
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-dark-2 text-xs">持仓数量</p>
+                <p class="font-medium mt-1" id="singleAssetQuantity">100股</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-dark-2 text-xs">持仓成本</p>
+                <p class="font-medium mt-1" id="singleAssetCost">¥185.60</p>
+              </div>
+              <div class="bg-gray-50 rounded-lg p-3">
+                <p class="text-dark-2 text-xs">持仓收益</p>
+                <p class="font-medium mt-1 text-success" id="singleAssetProfit">
+                  ¥2,450.80
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <!-- 页脚 -->
+    <footer class="bg-white border-t border-light-2 py-6 mt-8">
+      <div class="container mx-auto px-4">
+        <div class="flex flex-col md:flex-row justify-between items-center">
+          <div class="flex items-center mb-4 md:mb-0">
+            <i class="fas fa-wallet text-primary mr-2"> </i>
+            <span class="font-bold text-primary"> 财富管家 </span>
+            <span class="text-dark-2 ml-2"> © 2023 版权所有 </span>
+          </div>
+          <div class="flex space-x-6">
+            <a
+              class="text-dark-2 hover:text-primary transition-colors text-sm"
+              href="javascript:void(0);"
+            >
+              关于我们
+            </a>
+            <a
+              class="text-dark-2 hover:text-primary transition-colors text-sm"
+              href="javascript:void(0);"
+            >
+              服务条款
+            </a>
+            <a
+              class="text-dark-2 hover:text-primary transition-colors text-sm"
+              href="javascript:void(0);"
+            >
+              隐私政策
+            </a>
+            <a
+              class="text-dark-2 hover:text-primary transition-colors text-sm"
+              href="javascript:void(0);"
+            >
+              帮助中心
+            </a>
+          </div>
+          <div class="flex space-x-4 mt-4 md:mt-0">
+            <a
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-dark-2 hover:bg-primary hover:text-white transition-colors"
+              href="javascript:void(0);"
+            >
+              <i class="fab fa-weixin"> </i>
+            </a>
+            <a
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-dark-2 hover:bg-primary hover:text-white transition-colors"
+              href="javascript:void(0);"
+            >
+              <i class="fab fa-weibo"> </i>
+            </a>
+            <a
+              class="w-8 h-8 rounded-full bg-gray-100 flex items-center justify-center text-dark-2 hover:bg-primary hover:text-white transition-colors"
+              href="javascript:void(0);"
+            >
+              <i class="fas fa-envelope"> </i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </footer>
+    <script>
+      // 页面加载时初始化
+      document.addEventListener('DOMContentLoaded', function () {
+        // 初始化图表
+        initCharts();
+
+        // 初始化事件监听
+        initEventListeners();
+      });
+
+      // 初始化图表
+      function initCharts() {
+        // 初始化趋势图
+        initTrendChart('total');
+
+        // 初始化饼图
+        initCompositionChart('total');
+      }
+
+      // 初始化趋势图
+      function initTrendChart(type) {
+        var id = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+        var trendChartEl = document.getElementById('trendChart');
+        var trendChart = echarts.init(trendChartEl);
+
+        // 根据不同类型设置不同数据
+        var chartData = {};
+        if (type === 'total') {
+          chartData = {
+            title: '总资产走势',
+            data: [120500, 121800, 123200, 122500, 124100, 125600, 126800, 127300, 128100, 127900, 128560]
+          };
+        } else if (type === 'stock') {
+          if (id === 'xiaomi') {
+            chartData = {
+              title: '小米集团股价走势',
+              data: [12.5, 12.8, 13.2, 13.0, 13.5, 13.8, 14.0, 13.9, 14.2, 14.5, 14.8]
+            };
+          } else if (id === 'tencent') {
+            chartData = {
+              title: '腾讯控股股价走势',
+              data: [320, 325, 330, 328, 335, 340, 345, 342, 348, 352, 358]
+            };
+          } else if (id === 'byd') {
+            chartData = {
+              title: '比亚迪股价走势',
+              data: [285, 288, 292, 290, 287, 285, 283, 280, 278, 276, 275]
+            };
+          } else {
+            chartData = {
+              title: '股票资产走势',
+              data: [62000, 62500, 63200, 63000, 63800, 64200, 64500, 64300, 65000, 64800, 65840]
+            };
+          }
+        } else if (type === 'fund') {
+          chartData = {
+            title: '基金资产走势',
+            data: [28000, 27900, 27800, 27700, 27600, 27750, 27800, 27700, 27650, 27580, 27520]
+          };
+        }
+        var option = {
+          tooltip: {
+            trigger: 'axis',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderColor: '#e0e0e0',
+            borderWidth: 1,
+            padding: 10,
+            textStyle: {
+              color: '#333'
+            },
+            formatter: function formatter(params) {
+              var value = params[0].value;
+              if (type === 'stock' && id) {
+                return "".concat(params[0].axisValue, ": \xA5").concat(value.toFixed(2));
+              } else {
+                return "".concat(params[0].axisValue, ": \xA5").concat(value.toLocaleString());
+              }
+            },
+            axisPointer: {
+              type: 'line',
+              lineStyle: {
+                color: '#f0f0f0'
+              }
+            }
+          },
+          grid: {
+            left: '3%',
+            right: '3%',
+            bottom: '3%',
+            containLabel: true
+          },
+          xAxis: {
+            type: 'category',
+            boundaryGap: false,
+            data: ['10/1', '10/2', '10/3', '10/4', '10/5', '10/6', '10/7', '10/8', '10/9', '10/10', '10/11'],
+            axisLine: {
+              lineStyle: {
+                color: '#f0f0f0'
+              }
+            },
+            axisLabel: {
+              color: '#888'
+            }
+          },
+          yAxis: {
+            type: 'value',
+            axisLine: {
+              show: false
+            },
+            axisTick: {
+              show: false
+            },
+            splitLine: {
+              lineStyle: {
+                color: '#f5f5f5'
+              }
+            },
+            axisLabel: {
+              color: '#888',
+              formatter: function formatter(value) {
+                if (type === 'stock' && id) {
+                  return value;
+                } else if (value >= 10000) {
+                  return value / 10000 + '万';
+                }
+                return value;
+              }
+            }
+          },
+          series: [{
+            data: chartData.data,
+            type: 'line',
+            smooth: true,
+            lineStyle: {
+              width: 3,
+              color: '#165DFF'
+            },
+            itemStyle: {
+              color: '#165DFF',
+              borderWidth: 2,
+              borderColor: '#fff',
+              shadowBlur: 4,
+              shadowColor: 'rgba(22, 93, 255, 0.3)'
+            },
+            areaStyle: {
+              color: new echarts.graphic.LinearGradient(0, 0, 0, 1, [{
+                offset: 0,
+                color: 'rgba(22, 93, 255, 0.2)'
+              }, {
+                offset: 1,
+                color: 'rgba(22, 93, 255, 0)'
+              }])
+            },
+            symbolSize: 6,
+            symbol: 'circle'
+          }]
+        };
+        trendChart.setOption(option);
+
+        // 响应窗口大小变化
+        window.addEventListener('resize', function () {
+          trendChart.resize();
+        });
+      }
+
+      // 初始化饼图
+      function initCompositionChart(type) {
+        var compositionChartEl = document.getElementById('compositionChart');
+        var compositionChart = echarts.init(compositionChartEl);
+
+        // 根据不同类型设置不同数据
+        var chartData = {};
+        if (type === 'total') {
+          chartData = {
+            title: '总资产构成',
+            data: [{
+              value: 35200,
+              name: '现金余额',
+              itemStyle: {
+                color: '#36CFC9'
+              }
+            }, {
+              value: 65840,
+              name: '股票',
+              itemStyle: {
+                color: '#FAAD14'
+              }
+            }, {
+              value: 27520,
+              name: '基金',
+              itemStyle: {
+                color: '#52C41A'
+              }
+            }]
+          };
+        } else if (type === 'stock') {
+          chartData = {
+            title: '股票资产构成',
+            data: [{
+              value: 12560,
+              name: '小米集团',
+              itemStyle: {
+                color: '#FF7A45'
+              }
+            }, {
+              value: 19890,
+              name: '腾讯控股',
+              itemStyle: {
+                color: '#1890FF'
+              }
+            }, {
+              value: 33390,
+              name: '比亚迪',
+              itemStyle: {
+                color: '#722ED1'
+              }
+            }]
+          };
+        } else if (type === 'fund') {
+          chartData = {
+            title: '基金资产构成',
+            data: [{
+              value: 15200,
+              name: '沪深300指数基金',
+              itemStyle: {
+                color: '#FAAD14'
+              }
+            }, {
+              value: 12319,
+              name: '成长精选混合',
+              itemStyle: {
+                color: '#52C41A'
+              }
+            }]
+          };
+        }
+        var option = {
+          tooltip: {
+            trigger: 'item',
+            backgroundColor: 'rgba(255, 255, 255, 0.9)',
+            borderColor: '#e0e0e0',
+            borderWidth: 1,
+            padding: 10,
+            textStyle: {
+              color: '#333'
+            },
+            formatter: '{b}: ¥{c} ({d}%)'
+          },
+          legend: {
+            orient: 'vertical',
+            right: 10,
+            top: 'center',
+            textStyle: {
+              color: '#666'
+            },
+            formatter: function formatter(name) {
+              var data = chartData.data.find(function (item) {
+                return item.name === name;
+              });
+              return "".concat(name, " (\xA5").concat(data.value.toLocaleString(), ")");
+            }
+          },
+          series: [{
+            name: chartData.title,
+            type: 'pie',
+            radius: ['40%', '70%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 6,
+              borderColor: '#fff',
+              borderWidth: 2
+            },
+            label: {
+              show: false,
+              position: 'center'
+            },
+            emphasis: {
+              label: {
+                show: true,
+                fontSize: 16,
+                fontWeight: 'bold'
+              }
+            },
+            labelLine: {
+              show: false
+            },
+            data: chartData.data
+          }]
+        };
+        compositionChart.setOption(option);
+
+        // 响应窗口大小变化
+        window.addEventListener('resize', function () {
+          compositionChart.resize();
+        });
+      }
+
+      // 初始化事件监听
+      function initEventListeners() {
+        // 资产卡片点击事件
+        document.getElementById('totalAssetCard').addEventListener('click', function () {
+          showTotalAssetView();
+        });
+        document.getElementById('stockCard').addEventListener('click', function () {
+          showStockAssetView();
+        });
+        document.getElementById('fundCard').addEventListener('click', function () {
+          showFundAssetView();
+        });
+        document.getElementById('balanceCard').addEventListener('click', function () {
+          showBalanceAssetView();
+        });
+
+        // 股票分类展开/折叠
+        document.querySelector('.stock-category').addEventListener('click', function () {
+          var icon = this.querySelector('i.fas');
+          var subcategories = document.querySelectorAll('.stock-subcategory');
+          icon.classList.toggle('rotate-90');
+          subcategories.forEach(function (sub) {
+            sub.classList.toggle('hidden');
+          });
+        });
+
+        // 股票子类展开/折叠
+        document.querySelectorAll('.stock-subcategory').forEach(function (subcategory) {
+          subcategory.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var icon = this.querySelector('i.fas');
+            var items = this.querySelector('.stock-items');
+            icon.classList.toggle('rotate-90');
+            items.classList.toggle('hidden');
+          });
+        });
+
+        // 基金分类展开/折叠
+        document.querySelector('.fund-category').addEventListener('click', function () {
+          var icon = this.querySelector('i.fas');
+          var subcategories = document.querySelectorAll('.fund-subcategory');
+          icon.classList.toggle('rotate-90');
+          subcategories.forEach(function (sub) {
+            sub.classList.toggle('hidden');
+          });
+        });
+
+        // 基金子类展开/折叠
+        document.querySelectorAll('.fund-subcategory').forEach(function (subcategory) {
+          subcategory.addEventListener('click', function (e) {
+            e.stopPropagation();
+            var icon = this.querySelector('i.fas');
+            var items = this.querySelector('.fund-items');
+            icon.classList.toggle('rotate-90');
+            items.classList.toggle('hidden');
+          });
+        });
+
+        // 资产项点击事件
+        document.querySelectorAll('.asset-item').forEach(function (item) {
+          item.addEventListener('click', function () {
+            var type = this.getAttribute('data-type');
+            var id = this.getAttribute('data-id');
+            if (type === 'stock') {
+              showSingleAssetView(type, id);
+            } else {
+              showSingleAssetView(type, id);
+            }
+          });
+        });
+
+        // 图表周期按钮点击事件
+        document.querySelectorAll('.chart-period-btn').forEach(function (btn) {
+          btn.addEventListener('click', function () {
+            // 移除所有按钮的选中状态
+            document.querySelectorAll('.chart-period-btn').forEach(function (b) {
+              b.classList.remove('bg-primary', 'text-white');
+              b.classList.add('bg-gray-100', 'text-dark-2');
+            });
+
+            // 设置当前按钮为选中状态
+            this.classList.remove('bg-gray-100', 'text-dark-2');
+            this.classList.add('bg-primary', 'text-white');
+
+            // 这里可以添加切换不同周期数据的逻辑
+          });
+        });
+
+        // 初始化弹窗事件监听
+        initModalEventListeners();
+      }
+
+      // 显示总资产视图
+      function showTotalAssetView() {
+        document.getElementById('chartTitle').textContent = '资产走势与构成';
+        document.getElementById('compositionChartContainer').classList.remove('hidden');
+        document.getElementById('singleAssetDetail').classList.add('hidden');
+        initTrendChart('total');
+        initCompositionChart('total');
+      }
+
+      // 显示股票资产视图
+      function showStockAssetView() {
+        document.getElementById('chartTitle').textContent = '股票资产走势与构成';
+        document.getElementById('compositionChartContainer').classList.remove('hidden');
+        document.getElementById('singleAssetDetail').classList.add('hidden');
+        initTrendChart('stock');
+        initCompositionChart('stock');
+      }
+
+      // 显示基金资产视图
+      function showFundAssetView() {
+        document.getElementById('chartTitle').textContent = '基金资产走势与构成';
+        document.getElementById('compositionChartContainer').classList.remove('hidden');
+        document.getElementById('singleAssetDetail').classList.add('hidden');
+        initTrendChart('fund');
+        initCompositionChart('fund');
+      }
+
+      // 显示现金资产视图
+      function showBalanceAssetView() {
+        document.getElementById('chartTitle').textContent = '现金余额';
+        document.getElementById('compositionChartContainer').classList.add('hidden');
+        document.getElementById('singleAssetDetail').classList.remove('hidden');
+
+        // 设置现金资产详情
+        document.getElementById('singleAssetLogo').src = 'https://design.gemcoder.com/staticResource/echoAiSystemImages/f2dd560da92553b242b1c8b9b2dd01ff.png';
+        document.getElementById('singleAssetName').textContent = '现金余额';
+        document.getElementById('singleAssetCode').textContent = '活期';
+        document.getElementById('singleAssetValue').textContent = '¥35,200.00';
+        document.getElementById('singleAssetChange').innerHTML = "<i class=\"fas fa-minus mr-1\" data-ytId=\"id-qkgbe\" data-ytId=\"id-8f2qf\" data-ytId=\"id-qzj55\" data-ytId=\"id-m8isj\" data-ytId=\"id-2zbp6\"></i> 0.0%";
+        document.getElementById('singleAssetQuantity').textContent = '可用';
+        document.getElementById('singleAssetCost').textContent = '0.35%';
+        document.getElementById('singleAssetProfit').textContent = '活期利息';
+
+        // 初始化趋势图
+        initTrendChart('balance');
+      }
+
+      // 显示单个资产视图
+      function showSingleAssetView(type, id) {
+        document.getElementById('chartTitle').textContent = '资产详情';
+        document.getElementById('compositionChartContainer').classList.add('hidden');
+        document.getElementById('singleAssetDetail').classList.remove('hidden');
+
+        // 根据资产类型和ID设置详情
+        var assetDetails = {};
+        if (type === 'stock') {
+          if (id === 'xiaomi') {
+            assetDetails = {
+              logo: 'https://design.gemcoder.com/staticResource/echoAiSystemImages/a76ab7255f280a1ce958cc4799454df4.png',
+              name: '小米集团',
+              code: '01810.HK',
+              value: '¥14.80',
+              change: '+2.3%',
+              changeClass: 'text-success',
+              changeIcon: 'fa-arrow-up',
+              quantity: '850股',
+              cost: '¥12.50',
+              profit: '¥2,040.00'
+            };
+          } else if (id === 'tencent') {
+            assetDetails = {
+              logo: 'https://design.gemcoder.com/staticResource/echoAiSystemImages/7c69558055c16ec817cb5a09db4d6cca.png',
+              name: '腾讯控股',
+              code: '00700.HK',
+              value: '¥358.00',
+              change: '+3.1%',
+              changeClass: 'text-success',
+              changeIcon: 'fa-arrow-up',
+              quantity: '55股',
+              cost: '¥320.00',
+              profit: '¥2,090.00'
+            };
+          } else if (id === 'byd') {
+            assetDetails = {
+              logo: 'https://design.gemcoder.com/staticResource/echoAiSystemImages/77d9cb1ac7349ba99fae43acf61e4ce6.png',
+              name: '比亚迪',
+              code: '002594.SZ',
+              value: '¥275.00',
+              change: '-1.2%',
+              changeClass: 'text-danger',
+              changeIcon: 'fa-arrow-down',
+              quantity: '121股',
+              cost: '¥285.00',
+              profit: '-1,210.00'
+            };
+          }
+        } else if (type === 'fund') {
+          if (id === 'hs300') {
+            assetDetails = {
+              logo: 'https://design.gemcoder.com/staticResource/echoAiSystemImages/992a9dd5c806a7365315ffb771954c2c.png',
+              name: '沪深300指数基金',
+              code: '指数型',
+              value: '¥1.52',
+              change: '+0.8%',
+              changeClass: 'text-success',
+              changeIcon: 'fa-arrow-up',
+              quantity: '10000份',
+              cost: '¥1.45',
+              profit: '¥700.75'
+            };
+          } else if (id === 'growth') {
+            assetDetails = {
+              logo: 'https://design.gemcoder.com/staticResource/echoAiSystemImages/53fa0eec8d6904a95a98f637ecfe6e84.png',
+              name: '成长精选混合',
+              code: '混合型',
+              value: '¥2.35',
+              change: '-1.8%',
+              changeClass: 'text-danger',
+              changeIcon: 'fa-arrow-down',
+              quantity: '5242份',
+              cost: '¥2.48',
+              profit: '-680.45'
+            };
+          }
+        }
+
+        // 更新详情面板
+        document.getElementById('singleAssetLogo').src = assetDetails.logo;
+        document.getElementById('singleAssetName').textContent = assetDetails.name;
+        document.getElementById('singleAssetCode').textContent = assetDetails.code;
+        document.getElementById('singleAssetValue').textContent = assetDetails.value;
+        var changeEl = document.getElementById('singleAssetChange');
+        changeEl.className = "text-sm font-medium flex items-center justify-end mt-1 ".concat(assetDetails.changeClass);
+        changeEl.innerHTML = "<i class=\"fas ".concat(assetDetails.changeIcon, " mr-1\"></i> ").concat(assetDetails.change);
+        document.getElementById('singleAssetQuantity').textContent = assetDetails.quantity;
+        document.getElementById('singleAssetCost').textContent = assetDetails.cost;
+        document.getElementById('singleAssetProfit').textContent = assetDetails.profit;
+
+        // 初始化趋势图
+        initTrendChart(type, id);
+      }
+
+      // 切换图表周期
+      function switchChartPeriod(period) {
+        // 移除所有按钮的选中状态
+        document.querySelectorAll('.chart-period-btn').forEach(function (b) {
+          b.classList.remove('bg-primary', 'text-white');
+          b.classList.add('bg-gray-100', 'text-dark-2');
+        });
+
+        // 设置当前按钮为选中状态
+        if (period === 'day') {
+          document.querySelectorAll('.chart-period-btn')[0].classList.remove('bg-gray-100', 'text-dark-2');
+          document.querySelectorAll('.chart-period-btn')[0].classList.add('bg-primary', 'text-white');
+        } else if (period === 'week') {
+          document.querySelectorAll('.chart-period-btn')[1].classList.remove('bg-gray-100', 'text-dark-2');
+          document.querySelectorAll('.chart-period-btn')[1].classList.add('bg-primary', 'text-white');
+        } else if (period === 'month') {
+          document.querySelectorAll('.chart-period-btn')[2].classList.remove('bg-gray-100', 'text-dark-2');
+          document.querySelectorAll('.chart-period-btn')[2].classList.add('bg-primary', 'text-white');
+        } else if (period === 'year') {
+          document.querySelectorAll('.chart-period-btn')[3].classList.remove('bg-gray-100', 'text-dark-2');
+          document.querySelectorAll('.chart-period-btn')[3].classList.add('bg-primary', 'text-white');
+        }
+
+        // 更新图表数据 - 这里可以根据实际需求添加不同周期的数据
+        updateChartDataByPeriod(period);
+      }
+
+      // 根据周期更新图表数据
+      function updateChartDataByPeriod(period) {
+        // 获取当前选中的资产类型
+        var currentType = 'total';
+        if (document.getElementById('chartTitle').textContent.includes('股票')) {
+          currentType = 'stock';
+        } else if (document.getElementById('chartTitle').textContent.includes('基金')) {
+          currentType = 'fund';
+        } else if (document.getElementById('chartTitle').textContent.includes('现金')) {
+          currentType = 'balance';
+        }
+
+        // 重新初始化趋势图
+        initTrendChart(currentType);
+      }
+    </script>
+  </body>
+</html>
