@@ -26,3 +26,6 @@ The frontend consists of two pages: `mywallet` and `market`. These are responsib
 
 [market service document](./documents/marketServiceDocument.md)
 
+## The structure of Personal Wallet
+[Personal wallet document](./documents/后端wallet设计.md)
+
