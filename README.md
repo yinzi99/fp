@@ -22,7 +22,7 @@ The frontend consists of two pages: `mywallet` and `market`. These are responsib
 
 [ER diagram](documents/Database/db_ER.png)
 
-## The data flow of market service
+## The structure of market service
 
-[market service document](./documents/MarkerServiceStream.drawio)
+[market service document](./documents/marketServiceDocument.md)
 
