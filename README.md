@@ -18,7 +18,7 @@ The backend is divided into `Personal Service` and `Market Service`. The Persona
 The frontend consists of two pages: `mywallet` and `market`. These are responsible for user
 
 
-## The data flow of market service
+## The structure of market service
 
-[market service document](./documents/MarkerServiceStream.drawio)
+[market service document](./documents/marketServiceDocument.md)
 
