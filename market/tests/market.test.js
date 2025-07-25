@@ -287,7 +287,7 @@ describe('Fund API Endpoints', () => {
   // 4. 基金历史数据接口（GET /api/market/funds/{code}/history）
 
   // 5. 推荐基金接口（GET /api/market/funds/recommended）
-  describe('GET /api/market/funds/recommended', () => {
+  describe('GET /api/market/fund/recommended', () => {
     it('should return recommended funds list with default limit', async () => {
       const response = await request(app).get('/api/market/fund/recommended');
       

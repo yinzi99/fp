@@ -3,6 +3,7 @@
 ## The User storys
 
 [User story 1.0](./documents/UserStories.md)
+![flow of function dev](./chart/fanni/processOfDev.drawio.svg)
 
 ## The main structure of project
 
@@ -16,6 +17,8 @@ The backend is divided into `Personal Service` and `Market Service`. The Persona
 
 The frontend consists of two pages: `mywallet` and `market`. These are responsible for user
 
+
 ## The data flow of market service
 
-[market service document](./documents/marketServiceDocument.md)
+[market service document](./documents/MarkerServiceStream.drawio)
+
