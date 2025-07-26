@@ -26,6 +26,30 @@ Adopt the **Conventional Commits specification** with the following format:
 | test     | Add or modify test cases                     | `test: supplement fund interface tests`  |
 | chore    | Dependency management or build config changes| `chore: upgrade axios to 1.4.0`          |
 
+### 2.3 Commit Message Example
+
+```
+fix(stock): fix code format error
+```
+
+### 2.4 Eslint check
+
+plz do eslint check before commit
+
+1. ```bash
+    npm install husky lint-staged --save-dev // install the lint check denpency in your local environment
+    ```
+    ```
+2. ```bash
+    npm run prepare //init husky
+    ```
+3. ```bash
+    npx husky add .husky/pre-commit "npx lint-staged" // add the lint check command in the pre-commit hook
+    ```
+4. ```bash
+    npx eslint .  //run the eslint check
+    ```
+
 
 ## 3. Code Specifications
 ### 3.1 General Rules
