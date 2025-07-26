@@ -1,0 +1,32 @@
+{
+  "name": "financeproject",
+  "version": "1.0.0",
+  "description": "This is the training design",
+  "main": ".commitlintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": " eslint . --ext .js,.jsx"
+  },
+  "keywords": [],
+  "author": "Fanni",
+  "license": "ISC",
+  "dependencies": {
+    "@commitlint/cli": "^17.6.3",
+    "@commitlint/config-conventional": "^17.6.3",
+    "husky": "^8.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinzi99/fp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/yinzi99/fp/issues"
+  },
+  "homepage": "https://github.com/yinzi99/fp#readme",
+  "devDependencies": {
+    "@eslint/js": "^9.32.0",
+    "eslint": "^9.32.0",
+    "eslint-plugin-react": "^7.37.5",
+    "globals": "^16.3.0"
+  }
+}

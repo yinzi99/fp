@@ -26,13 +26,18 @@ The frontend consists of two pages: `mywallet` and `market`. These are responsib
 
 [market service document](./documents/marketServiceDocument.md)
 
+
 ## The structure of wallet service
 
 [wallet service document](./documents/后端wallet设计.md)
 
 ## The Front API requirements
+
 ![mywallet page demo](./documents/mywallet.png)
 ![market page demo](./documents/market.png)
 [The Front API requirements](./documents/apirequire.md)
 
 
+## The commit rules
+
+[The standard of code and commit ](./documents/commitRules.md)
