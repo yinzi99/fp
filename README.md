@@ -22,3 +22,6 @@ The frontend consists of two pages: `mywallet` and `market`. These are responsib
 
 [market service document](./documents/marketServiceDocument.md)
 
+## The commit rules
+
+[The standard of code and commit ](./documents/commitRules.md)
