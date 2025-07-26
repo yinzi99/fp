@@ -5,7 +5,7 @@
   "main": ".commitlintrc.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": " echo 'No linting configured"
+    "lint": " eslint . --ext .js,.jsx"
   },
   "keywords": [],
   "author": "Fanni",
@@ -19,8 +19,6 @@
     "type": "git",
     "url": "git+https://github.com/yinzi99/fp.git"
   },
-  "author": "Fanni",
-  "license": "ISC",
   "bugs": {
     "url": "https://github.com/yinzi99/fp/issues"
   },
