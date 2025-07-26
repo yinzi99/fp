@@ -1,0 +1,19 @@
+{
+  "name": "financeproject",
+  "version": "1.0.0",
+  "description": "This is the training design",
+  "main": ".commitlintrc.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yinzi99/fp.git"
+  },
+  "author": "Fanni",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yinzi99/fp/issues"
+  },
+  "homepage": "https://github.com/yinzi99/fp#readme"
+}
