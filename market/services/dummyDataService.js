@@ -172,7 +172,7 @@ const getFundBriefByCode = async (code) => {  try {
     throw new BusinessError("Failed to fetch fund details");
   
   }};
-const getFundHistoryByCode = async (code, params) => { /* 实现逻辑 */ };
+const getFundHistoryByCode = async (_code, _params) => { /* 实现逻辑 */ };
 const getRecommondedFunds = async () => { 
 
   getAllFundList({ page: 5, limit: 10 , sort: 'change_percent', order: 'desc'});

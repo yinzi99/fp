@@ -229,7 +229,7 @@ describe('Fund API Endpoints', () => {
       
       expect(response.statusCode).toBe(200);
       
-    fundData = response.body.data;
+    let fundData = response.body.data;
     expect(response.body.status).toBe('yes');
     expect(fundData.fund_code).toBe(validFundCode);
     expect(fundData.short_name).toBe('中欧嘉益一年持有期混合A'); 
