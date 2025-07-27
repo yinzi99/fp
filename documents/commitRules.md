@@ -34,21 +34,14 @@ fix(stock): fix code format error
 
 ### 2.4 Eslint check
 
-plz do eslint check before commit
 
-1. ```bash
-    npm install husky lint-staged --save-dev // install the lint check denpency in your local environment
-    ```
-    ```
-2. ```bash
-    npm run prepare //init husky
-    ```
-3. ```bash
-    npx husky add .husky/pre-commit "npx lint-staged" // add the lint check command in the pre-commit hook
-    ```
-4. ```bash
-    npx eslint .  //run the eslint check
-    ```
+| Operation                   | Command                       | Description                                |
+|-----------------------------|-------------------------------|-------------------------------------------|
+| First-time project pull     | npm run init                  | Install dependencies + initialize Husky hooks |
+| Daily code development check| npm run lint                  | Full code style check                     |
+| Fix code format issues      | npm run lint:fix              | Automatically fix fixable format errors   |
+| Commit code                 | git add . && npm run commit   | (Optional) Generate compliant commit message through interactive tool |
+| Validate commit message compliance | npm run commitlint | Check if the latest commit complies with the standards |
 
 
 ## 3. Code Specifications
