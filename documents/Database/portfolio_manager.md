@@ -14,32 +14,13 @@ Stores user account information.
 | `username`      | VARCHAR(50)  | Unique username               |
 | `email`         | VARCHAR(100) | User email (optional, unique) |
 | `password_hash` | VARCHAR(255) | Hashed user password          |
+| `balance`       | DECIMAL(12, 2)| Current account balance      |
 | `created_at`    | TIMESTAMP    | Account creation time         |
 | `updated_at`    | TIMESTAMP    | Last modification time        |
 
-
-
 ------
 
-### 📁 2. Table: `accounts`
-
-Stores the user's cash accounts (main or sub-accounts).
-
-| Field          | Type           | Description                                     |
-| -------------- | -------------- | ----------------------------------------------- |
-| `id`           | CHAR(36)       | Unique account ID (UUID)                        |
-| `user_id`      | CHAR(36)       | Linked user ID                                  |
-| `name`         | VARCHAR(50)    | Account name (e.g., "Main Account", "Broker A") |
-| `account_type` | ENUM           | Either `main` or `sub`                          |
-| `balance`      | DECIMAL(12, 2) | Current account balance                         |
-| `created_at`   | TIMESTAMP      | Time of account creation                        |
-| `updated_at`   | TIMESTAMP      | Last modification time                          |
-
-
-
-------
-
-### 📁 3. Table: `cash_transfers`
+### 📁 2. Table: `cash_transfers_record`
 
 Records fund transfers between a user’s accounts.
 
@@ -47,33 +28,13 @@ Records fund transfers between a user’s accounts.
 | --------------- | -------------- | ------------------------- |
 | `id`            | CHAR(36)       | Unique transfer ID        |
 | `user_id`       | CHAR(36)       | Related user ID           |
-| `from_account`  | CHAR(36)       | Source account ID         |
-| `to_account`    | CHAR(36)       | Destination account ID    |
-| `amount`        | DECIMAL(12, 2) | Transfer amount           |
+| `amount`        | DECIMAL(12, 2) | Money                     |
 | `comment`       | TEXT           | Optional note             |
 | `transfer_date` | TIMESTAMP      | Timestamp of the transfer |
 
-
-
 ------
 
-### 📁 4. Table: `market_assets`
-
-Stores information about tradable assets from external markets.
-
-| Field         | Type         | Description                        |
-| ------------- | ------------ | ---------------------------------- |
-| `code`        | VARCHAR(50)  | Asset code (e.g., TSLA, 000001.SZ) |
-| `name`        | VARCHAR(100) | Asset name                         |
-| `type`        | ENUM         | Either `stock` or `fund`           |
-| `exchange`    | VARCHAR(50)  | Exchange name (e.g., NASDAQ, SSE)  |
-| `description` | TEXT         | Optional asset description         |
-
-
-
-------
-
-### 📁 5. Table: `holdings`
+### 📁 3. Table: `holdings`
 
 Tracks the user’s current portfolio holdings.
 
@@ -88,11 +49,9 @@ Tracks the user’s current portfolio holdings.
 | `created_at`    | TIMESTAMP      | Time of initial holding             |
 | `updated_at`    | TIMESTAMP      | Last modification time              |
 
-
-
 ------
 
-### 📁 6. Table: `transactions`
+### 📁 4. Table: `transactions`
 
 Stores detailed buy/sell transactions for each user.
 
@@ -108,11 +67,9 @@ Stores detailed buy/sell transactions for each user.
 | `account_id`       | CHAR(36)       | Account used for transaction               |
 | `transaction_date` | TIMESTAMP      | Date and time of the transaction           |
 
-
-
 ------
 
-### 📁 7. Table: `portfolio_snapshots`
+### 📁 5. Table: `portfolio_snapshots`
 
 Daily snapshot of each user's portfolio value and profit.
 
