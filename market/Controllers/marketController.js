@@ -2,6 +2,7 @@ const dummyDataService = require('../services/dummyDataService');
 const { successResponse } = require('share-utils');
 const paramValidator = require('share-utils');
 const { validateResCode } = require('../utils/validate');
+
 /**
  * 股票接口控制器
  */
@@ -74,6 +75,7 @@ const getFundInfoByCode = async(req, res, next) => {
 
 const getFundHistoryByCode = async(req, res, next) => {
     try {
+
         let { code, day } = validateResCode(req);
         const history = await dummyDataService.getFundHistoryByCode(code, day);
         successResponse(res, history);

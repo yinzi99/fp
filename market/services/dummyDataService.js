@@ -38,7 +38,7 @@ const getStockHistoryByCode = async(code, days) => {
     }
 };
 
-// @KikiHuang2000 TODO: 实现推荐股票逻辑
+
 const getRecommondedStocks = async() => {
     try {
         const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stock/recommended`);
