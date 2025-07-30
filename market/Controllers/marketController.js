@@ -1,6 +1,7 @@
 const dummyDataService = require('../services/dummyDataService');
 const { successResponse } = require('share-utils');
 const paramValidator = require('share-utils');
+const { validateResCode } = require('../utils/validate');
 
 /**
  * 股票接口控制器
