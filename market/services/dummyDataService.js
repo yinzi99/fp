@@ -29,7 +29,7 @@ const getStockInfoByCode = async(code) => {
 
 const getStockHistoryByCode = async(code, days) => {
     try {
-        const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stocks/${code}/history`, { days });
+        const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stocks/${code}/history`, { params: { day: days } });
         return response.data;
     } catch (error) {
         if (error) {
@@ -75,15 +75,15 @@ const getFundInfoByCode = async(code) => {
 }
 
 
-const getFundHistoryByCode = async(_code, _params) => {
-    try {
-        const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/funds/${_code}/history`, { params: _params });
-        return response.data;
-    } catch (error) {
-        if (error) {
-            throw new BusinessError(error.message || error.response.data);
-        }
+const getFundHistoryByCode = async (code, days) => {
+  try {
+    const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/funds/${code}/history`, { params: { day: days } });
+    return response.data;
+  } catch (error) {
+    if (error) {
+      throw new BusinessError(error.message || error.response.data);
     }
+  }
 };
 
 // @KikiHuang2000 TODO: 实现基金推荐逻辑
