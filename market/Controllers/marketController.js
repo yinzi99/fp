@@ -31,8 +31,8 @@ const getStockInfoByCode = async(req, res, next) => {
 
 const getStockHistoryByCode = async(req, res, next) => {
     try {
-        const { code, day } = validataResCode(req);
-        const history = await dummyDataService.getStockHistoryByCode(code, req.day);
+        let { code, day } = validateResCode(req);
+        const history = await dummyDataService.getStockHistoryByCode(code, day);
         successResponse(res, history);
     } catch (error) {
         next(error);
@@ -75,7 +75,8 @@ const getFundInfoByCode = async(req, res, next) => {
 
 const getFundHistoryByCode = async(req, res, next) => {
     try {
-        const { code, day } = validateResCode(req);
+
+        let { code, day } = validateResCode(req);
         const history = await dummyDataService.getFundHistoryByCode(code, day);
         successResponse(res, history);
     } catch (error) {

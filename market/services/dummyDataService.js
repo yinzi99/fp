@@ -29,7 +29,7 @@ const getStockInfoByCode = async(code) => {
 
 const getStockHistoryByCode = async(code, days) => {
     try {
-        const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stocks/${code}/history`, { params: { day: days } });
+        const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stocks/${code}/history`,  { params: { day: days } });
         return response.data;
     } catch (error) {
         if (error) {
@@ -38,7 +38,7 @@ const getStockHistoryByCode = async(code, days) => {
     }
 };
 
-// @KikiHuang2000 TODO: 实现推荐股票逻辑
+
 const getRecommondedStocks = async() => {
     try {
         const response = await axios.get(`${DUMMY_DATA_BASE_URL}/api/stock/recommended`);
