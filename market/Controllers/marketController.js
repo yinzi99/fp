@@ -5,6 +5,7 @@ const paramValidator = require('share-utils');
 /**
  * 股票接口控制器
  */
+
 const getAllStockList = async(req, res, next) => {
     try {
         paramValidator.validateOfGetAllStock(req);
@@ -81,6 +82,7 @@ const getFundHistoryByCode = async(req, res, next) => {
     } catch (error) {
         next(error);
     }
+
 };
 
 const getRecommondedFunds = async(req, res, next) => {
@@ -103,3 +105,4 @@ module.exports = {
     getFundHistoryByCode,
     getRecommondedFunds
 };
+    
